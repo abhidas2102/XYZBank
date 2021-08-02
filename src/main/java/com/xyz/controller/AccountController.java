@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xyz.beans.Aadhaar;
 import com.xyz.beans.Account;
 import com.xyz.services.AccountService;
 
@@ -66,6 +67,11 @@ public class AccountController {
 		float famount = Float.parseFloat(amount);
 		float newBalance = service.withdraw(pan, famount);
 		return newBalance;
+	}
+	
+	@GetMapping("viewaadhaar/{aadhaarNumber}")
+	public String getAadhaar(@PathVariable String aadhaarNumber) {
+		return service.getAadhaar(aadhaarNumber);
 	}
 	
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

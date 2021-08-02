@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xyz.AadhaarProxy;
 import com.xyz.beans.Account;
 import com.xyz.repositories.AccountsRepository;
 
@@ -12,6 +13,9 @@ import com.xyz.repositories.AccountsRepository;
 public class AccountService {
 	@Autowired
 	AccountsRepository repo;
+	
+	@Autowired
+	AadhaarProxy aadhaarProxy;
 
 	public void createAccount(Account acc) {
 		repo.save(acc);
@@ -53,6 +57,11 @@ public class AccountService {
 		updateAccount(a);
 		
 		return a.getBalance();
+	}
+	
+	public String getAadhaar(String aadhaarNumber)
+	{
+		return aadhaarProxy.getAadhaar(aadhaarNumber).getAadhaarNumber();
 	}
 	
 }
